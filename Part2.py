@@ -1,3 +1,6 @@
+from pydantic import BaseModel
+from fastapi import Form
+
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -33,3 +36,19 @@ app.mount("/static", StaticFiles(directory="templates/static"), name="static")
 async def employees(request: Request):
    employees = ["Ahmmed", "Mohammed","Ali"]
    return templates.TemplateResponse("employees.html", {"request": request, "employees":employees})
+
+
+#Forms
+#Login form
+@app.get("/login", response_class=HTMLResponse)
+async def login(request: Request):
+   return templates.TemplateResponse("login.html", {"request": request})
+
+
+class User(BaseModel):
+   username:str
+   password:str
+
+@app.post("/submit/", response_model=User)
+async def submit(nm: str = Form(...), pwd: str = Form(...)):
+   return User(username=nm, password=pwd)
