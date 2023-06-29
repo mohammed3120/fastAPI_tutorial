@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>ERP</title>
+        <script src="{{ url_for('static', path='note.js') }}"></script>
+     </head>
+    <body onload="myFunction()">
+      <h2>Hello  Welcome to FastAPI</h2>
+      <img src="{{ url_for('static', path='fruit.jpg') }}" alt="" width="300">
+
+      {% for employee in employees%}
+        <h3>{{employee}}</h3>
+      {% endfor%}
+
+      <div id="time" style='text-align:right;'></div>
+      <h1><div id="ttl">Mohammed</div></h1>
+   </body>
+</html>
+</pre>
